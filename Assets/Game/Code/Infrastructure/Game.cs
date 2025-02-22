@@ -34,6 +34,11 @@ namespace Game.Code.Infrastructure
             {
                 SceneManager.LoadScene("Map3");
             }
+            
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
         }
 
         private void Init()
