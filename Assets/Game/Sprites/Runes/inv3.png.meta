@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Game/Sprites/MapsVisual/3screen-map-corals.png.meta
-guid: 7e45fbc72db80ac4ca11090b5dca4ede
-========
-guid: 50dbf5f25a526eb45ae6f336cb5f5f86
->>>>>>>> ArtMelnykov:Assets/Game/Sprites/Runes/inv.png.meta
+guid: 402fdb9de67ea1d45be97078bf81335e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

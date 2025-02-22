@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Game/Sprites/MapsVisual/3screen-map-corals.png.meta
-guid: 7e45fbc72db80ac4ca11090b5dca4ede
-========
-guid: 50dbf5f25a526eb45ae6f336cb5f5f86
->>>>>>>> ArtMelnykov:Assets/Game/Sprites/Runes/inv.png.meta
+guid: 4e2b24faf14135248ad638a9f976e7ce
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -76,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
