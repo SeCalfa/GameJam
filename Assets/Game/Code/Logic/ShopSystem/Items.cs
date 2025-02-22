@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Code.Logic.ShopSystem
 {
@@ -18,6 +19,8 @@ namespace Game.Code.Logic.ShopSystem
 
         private void Awake()
         {
+            _data = new DataValue(1);
+            
             ItemsList = new Dictionary<GameObject, int>()
             {
                 { _item1, 10 },
@@ -25,23 +28,32 @@ namespace Game.Code.Logic.ShopSystem
                 { _item3, 12 },
             };
         }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("ShopScene");
+            }
+        }
         
         public void PurchaseItem()
         {
             foreach (KeyValuePair<GameObject, int> pair in ItemsList)
             {
-                if (pair.Value >= _data.CurrentValue)
+                if (_data.CurrentValue >= pair.Value)
                 {
                     _data.CurrentValue -= pair.Value;
                     AddItemToPlayer(pair.Key, pair.Value);
-                    
+                }
+                else
+                {
+                    Debug.Log("Not enough money");
                 }
             }
         }
 
-        private void AddItemToPlayer(GameObject pairKey, int pairValue)
-        {
-            
-        }
+        private void AddItemToPlayer(GameObject pairKey, int pairValue) => 
+            Debug.Log("Item was added to player");
     }
 }

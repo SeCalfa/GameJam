@@ -1,24 +1,29 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Code.Logic.ShopSystem
 {
     public class InventorySystem : MonoBehaviour
     {
-        private string _sceneName;
+        private readonly string _sceneName = "ShopScene";
         
         private Items _items;
         
         private DataValue _dataValue;
-
-        public string CurrentScene;
         
-        private void BuyTools()
+        private void Awake()
         {
-            if (CurrentScene == _sceneName)
-            {
-                
-                _items.PurchaseItem();
-            }
+            _items = GetComponent<Items>();
+            SceneManager.sceneLoaded += LoadScene;
         }
+
+        private void LoadScene(Scene nameScene, LoadSceneMode loadSceneMode)
+        {
+            if (nameScene.name == _sceneName) 
+                BuyTools();
+        }
+
+        private void BuyTools() => 
+            _items.PurchaseItem();
     }
 }
