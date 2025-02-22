@@ -1,5 +1,6 @@
 using Game.Code.Infrastructure.GameObjectsLocator;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Code.Infrastructure
 {
@@ -15,6 +16,24 @@ namespace Game.Code.Infrastructure
             
             Init();
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                SceneManager.LoadScene("Game");
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                SceneManager.LoadScene("Map2");
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                SceneManager.LoadScene("Map3");
+            }
         }
 
         private void Init()
