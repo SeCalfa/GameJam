@@ -9,13 +9,14 @@ namespace Game.Code.Logic.GUI.FadeIn
         
         private void Awake() => 
             _spriteRenderer = GetComponent<SpriteRenderer>();
+        
 
         private void Show()
         {
             _spriteRenderer.enabled = true;
             _spriteRenderer.color = new Color(1, 1, 1, 0);
         }
-
+        
         private void Hide() => 
             StartCoroutine(FadeIn());
 
