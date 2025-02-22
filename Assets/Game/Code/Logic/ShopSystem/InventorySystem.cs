@@ -16,6 +16,7 @@ namespace Game.Code.Logic.ShopSystem
         {
             if (CurrentScene == _sceneName)
             {
+                
                 _items.PurchaseItem();
             }
         }

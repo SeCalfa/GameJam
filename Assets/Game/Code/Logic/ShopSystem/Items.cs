@@ -30,9 +30,11 @@ namespace Game.Code.Logic.ShopSystem
         {
             foreach (KeyValuePair<GameObject, int> pair in ItemsList)
             {
-                if (pair.Value == _data.CurrentValue)
+                if (pair.Value >= _data.CurrentValue)
                 {
+                    _data.CurrentValue -= pair.Value;
                     AddItemToPlayer(pair.Key, pair.Value);
+                    
                 }
             }
         }
