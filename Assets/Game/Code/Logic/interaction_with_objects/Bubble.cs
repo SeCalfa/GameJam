@@ -19,7 +19,7 @@ public class Bubble : MonoBehaviour
         _collider = GetComponent<Collider2D>();
 
         // Register the bubble in the game container
-        GameClass.Instance.Container.RegisterGameObject(gameObject.name, gameObject);
+        //GameClass.Instance.Container.RegisterGameObject(gameObject.name, gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
