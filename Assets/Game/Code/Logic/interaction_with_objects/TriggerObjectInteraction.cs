@@ -8,6 +8,7 @@ public class TriggerObjectInteraction : MonoBehaviour
 {
     [SerializeField] private TMP_Text interactPrompt;
     [SerializeField] private string promptMessage = "Press E to interact";
+    [SerializeField] private Animator animator; // Reference to the Animator component
 
     private bool isPlayerNearby = false;
 
@@ -29,7 +30,16 @@ public class TriggerObjectInteraction : MonoBehaviour
             }
 
             var hud = GameClass.Instance.Container.GetGameObjectByName<GameObject>(Constants.HudName);
-            hud.SetActive(true);
+            if (hud != null)
+            {
+                hud.SetActive(true);
+            }
+
+            // Trigger the disappearing animation
+            if (animator != null)
+            {
+                animator.SetTrigger("Disappear");
+            }
         }
     }
 
@@ -47,7 +57,7 @@ public class TriggerObjectInteraction : MonoBehaviour
         }
     }
 
-    // When player is not nearby
+    // When player leaves the area
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -60,9 +70,18 @@ public class TriggerObjectInteraction : MonoBehaviour
             if (GameClass.Instance.Container.Contains(Constants.HudName))
             {
                 var hud = GameClass.Instance.Container.GetGameObjectByName<GameObject>(Constants.HudName);
-                hud.SetActive(false);
-                GameClass.Instance.Container.RemoveGameObject(Constants.HudName); // Removing object to prevent memory leak
+                if (hud != null)
+                {
+                    hud.SetActive(false);
+                    GameClass.Instance.Container.RemoveGameObject(Constants.HudName); // Prevent memory leak
+                }
             }
         }
+    }
+
+    // Method to destroy the game object
+    private void DestroyObject()
+    {
+        Destroy(gameObject);
     }
 }
