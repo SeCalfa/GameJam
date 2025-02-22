@@ -24,16 +24,16 @@ public class TriggerObjectInteraction : MonoBehaviour
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            if (!GameClass.Instance.Container.Contains(Constants.HudName))
+            /*if (!GameClass.Instance.Container.Contains(Constants.HudName))
             {
                 GameClass.Instance.Container.RegisterGameObject(Constants.HudName, Constants.HudPath);
             }
-
+            
             var hud = GameClass.Instance.Container.GetGameObjectByName<GameObject>(Constants.HudName);
             if (hud != null)
             {
                 hud.SetActive(true);
-            }
+            }*/
 
             // Trigger the disappearing animation
             if (animator != null)
@@ -67,7 +67,7 @@ public class TriggerObjectInteraction : MonoBehaviour
             {
                 interactPrompt.gameObject.SetActive(false);
             }
-            if (GameClass.Instance.Container.Contains(Constants.HudName))
+            /*if (GameClass.Instance.Container.Contains(Constants.HudName))
             {
                 var hud = GameClass.Instance.Container.GetGameObjectByName<GameObject>(Constants.HudName);
                 if (hud != null)
@@ -75,7 +75,7 @@ public class TriggerObjectInteraction : MonoBehaviour
                     hud.SetActive(false);
                     GameClass.Instance.Container.RemoveGameObject(Constants.HudName); // Prevent memory leak
                 }
-            }
+            }*/
         }
     }
 
