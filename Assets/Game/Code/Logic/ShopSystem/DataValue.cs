@@ -6,7 +6,7 @@ namespace Game.Code.Logic.ShopSystem
 
         public DataValue(int currentValue)
         {
-            currentValue = CurrentValue;
+            CurrentValue = currentValue;
         }
         
     }

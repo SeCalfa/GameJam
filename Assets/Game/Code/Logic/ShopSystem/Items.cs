@@ -19,7 +19,7 @@ namespace Game.Code.Logic.ShopSystem
 
         private void Awake()
         {
-            _data = new DataValue(1);
+            _data = new DataValue(7);
             
             ItemsList = new Dictionary<GameObject, int>()
             {
@@ -43,11 +43,14 @@ namespace Game.Code.Logic.ShopSystem
             {
                 if (_data.CurrentValue >= pair.Value)
                 {
+                    Debug.Log(_data.CurrentValue + "Enough to buy");
                     _data.CurrentValue -= pair.Value;
                     AddItemToPlayer(pair.Key, pair.Value);
+                    Debug.Log($"Item : {pair.Key.name} was added");
                 }
                 else
                 {
+                    Debug.Log(_data.CurrentValue);
                     Debug.Log("Not enough money");
                 }
             }
