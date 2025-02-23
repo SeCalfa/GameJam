@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Code.Logic.GUI.FadeIn
+namespace Game.Code.Logic.GUI.Fade
 {
     public class SpriteRendererFade : MonoBehaviour
     {
         private List<SpriteRenderer> _spriteRenderer;
-        
+
         private float _alpha;
-        
+        private Coroutine _coroutine;
+
         public void Init(List<SpriteRenderer> spriteRenderer)
         {
             _spriteRenderer = spriteRenderer;
@@ -18,12 +19,22 @@ namespace Game.Code.Logic.GUI.FadeIn
 
         public void Show(Action onHide = null)
         {
-            StartCoroutine(FadeIn(onHide));
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
+            
+            _coroutine = StartCoroutine(FadeIn(onHide));
         }
 
         public void Hide(Action onHide = null)
         {
-            StartCoroutine(FadeOut(onHide));
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
+            
+            _coroutine = StartCoroutine(FadeOut(onHide));
         }
 
         private IEnumerator FadeIn(Action onHide)
