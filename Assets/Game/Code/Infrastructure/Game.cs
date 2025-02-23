@@ -1,7 +1,7 @@
 using Game.Code.Infrastructure.GameObjectsLocator;
 using Game.Code.Logic.GUI.FadeIn;
+using Game.Code.Logic.GUI.TransitionController;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game.Code.Infrastructure
 {
@@ -11,7 +11,9 @@ namespace Game.Code.Infrastructure
         
         public Container Container { get; private set; }
         public SpriteRendererFade SpriteRendererFade { get; private set; }
-        
+
+        private SceneTransitionController SceneTransitionController { get; set; }
+
         private void Awake()
         {
             if (Instance != null)
@@ -22,7 +24,8 @@ namespace Game.Code.Infrastructure
             Instance = this;
             
             Init();
-            CreateObjects();
+            CreateSpriteFade();
+            CreateTransitionController();
             
             DontDestroyOnLoad(gameObject);
         }
@@ -31,17 +34,17 @@ namespace Game.Code.Infrastructure
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                SceneManager.LoadScene("Game");
+                SceneTransitionController.StartSceneTransition("Game");
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                SceneManager.LoadScene("Map2");
+                SceneTransitionController.StartSceneTransition("Map2");
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                SceneManager.LoadScene("Map3");
+                SceneTransitionController.StartSceneTransition("Map3");
             }
             
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -55,12 +58,20 @@ namespace Game.Code.Infrastructure
             Container = new Container();
         }
 
-        private void CreateObjects()
+        private void CreateSpriteFade()
         {
             Container.RegisterGameObject(Constants.SpriteFadeName, Constants.SpriteFadePath);
             SpriteRendererFade = Container.GetGameObjectByName<SpriteRendererFade>(Constants.SpriteFadeName);
             
             DontDestroyOnLoad(SpriteRendererFade.gameObject);
+        }
+
+        private void CreateTransitionController()
+        {
+            Container.RegisterGameObject(Constants.CurtainSceneName, Constants.CurtainSceneTransitionPath);
+            SceneTransitionController = Container.GetGameObjectByName<SceneTransitionController>(Constants.CurtainSceneName);
+            
+            DontDestroyOnLoad(SceneTransitionController.gameObject);
         }
     }
 }

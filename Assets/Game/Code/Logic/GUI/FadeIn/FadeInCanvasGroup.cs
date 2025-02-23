@@ -7,8 +7,11 @@ namespace Game.Code.Logic.GUI.FadeIn
     {
         private CanvasGroup _canvasGroup;
 
-        private void Awake() => 
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
             _canvasGroup = GetComponent<CanvasGroup>();
+        }
 
         private void Start()
         {
