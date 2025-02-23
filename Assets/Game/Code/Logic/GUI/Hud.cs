@@ -13,6 +13,20 @@ namespace Game.Code.Logic.GUI
         [SerializeField] private Image rune3;
         [Space]
         [SerializeField] private Image interactionTip; // Add reference to the interaction tip image
+        
+        private float _oxygen = 100;
+        private float _brainHp = 100;
+
+        private void Update()
+        {
+            OxygenCalculator();
+        }
+
+        private void OxygenCalculator()
+        {
+            _oxygen -= Time.deltaTime / 2;
+            Infrastructure.Game.Instance.Hud.FillOxygenBar(_oxygen);
+        }
 
         public void FillBrainBar(float hp)
         {

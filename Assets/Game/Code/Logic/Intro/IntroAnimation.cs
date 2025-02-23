@@ -36,7 +36,7 @@ namespace Game.Code.Logic.Intro
             
             Infrastructure.Game.Instance.Curtain.Show(() =>
             {
-                SceneManager.LoadScene("Game");
+                SceneManager.LoadScene("Map1");
             });
         }
     }

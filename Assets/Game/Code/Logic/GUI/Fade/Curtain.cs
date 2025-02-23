@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Game.Code.Infrastructure;
 using UnityEngine;
 
 namespace Game.Code.Logic.GUI.Fade

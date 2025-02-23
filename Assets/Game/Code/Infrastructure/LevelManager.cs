@@ -12,8 +12,14 @@ namespace Game.Code.Infrastructure
         private SpriteRendererFade _sceneFade;
         private Curtain _curtain;
         
+        public LevelType GetLevelType => levelType;
+        
+        public static LevelManager Instance { get; private set; }
+        
         private void Awake()
         {
+            Instance = this;
+            
             _sceneFade = Game.Instance.SpriteRendererFade;
             if (levelType != LevelType.Intro) _sceneFade.Init(darkSide);
             
