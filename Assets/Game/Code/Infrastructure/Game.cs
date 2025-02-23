@@ -1,4 +1,5 @@
 using Game.Code.Infrastructure.GameObjectsLocator;
+using Game.Code.Logic.Audio;
 using Game.Code.Logic.GUI.FadeIn;
 using Game.Code.Logic.GUI.TransitionController;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Game.Code.Infrastructure
 
         private SceneTransitionController SceneTransitionController { get; set; }
 
+        public SoundManager SoundManager { get; set; }
+        
         private void Awake()
         {
             if (Instance != null)
@@ -26,7 +29,8 @@ namespace Game.Code.Infrastructure
             Init();
             CreateSpriteFade();
             CreateTransitionController();
-            
+            CreateSoundManager();
+                        
             DontDestroyOnLoad(gameObject);
         }
 
@@ -35,16 +39,21 @@ namespace Game.Code.Infrastructure
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 SceneTransitionController.StartSceneTransition("Game");
+
+                
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 SceneTransitionController.StartSceneTransition("Map2");
+                
+                
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 SceneTransitionController.StartSceneTransition("Map3");
+                
             }
             
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -72,6 +81,14 @@ namespace Game.Code.Infrastructure
             SceneTransitionController = Container.GetGameObjectByName<SceneTransitionController>(Constants.CurtainSceneName);
             
             DontDestroyOnLoad(SceneTransitionController.gameObject);
+        }
+
+        private void CreateSoundManager()
+        {
+            Container.RegisterGameObject(Constants.SoundManagerName, Constants.SoundManagerPath);
+            SoundManager = Container.GetGameObjectByName<SoundManager>(Constants.SoundManagerName);
+            
+            DontDestroyOnLoad(SoundManager.gameObject);
         }
     }
 }
