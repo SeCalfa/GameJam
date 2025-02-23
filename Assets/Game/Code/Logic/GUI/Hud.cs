@@ -12,7 +12,7 @@ namespace Game.Code.Logic.GUI
         [SerializeField] private Image rune2;
         [SerializeField] private Image rune3;
         [Space]
-        [SerializeField] private Image interactionTip; // Add reference to the interaction tip image
+        [SerializeField] private Image interactionTip; 
         
         private float _oxygen = 100;
         private float _brainHp = 100;
@@ -53,7 +53,6 @@ namespace Game.Code.Logic.GUI
             rune3.enabled = true;
         }
 
-        // Method to activate the interaction tip image
         public void ShowInteractionTip(bool show)
         {
             if (interactionTip != null)
