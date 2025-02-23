@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Game.Code;
-using Game.Code.Logic.GUI.Fade;
 
-namespace Game.Code.Logic.GUI.Menu
+namespace Game.Code.Logic.GUI
 {
     public class MenuManager : MonoBehaviour
     {

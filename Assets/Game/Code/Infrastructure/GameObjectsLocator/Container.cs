@@ -12,6 +12,14 @@ namespace Game.Code.Infrastructure.GameObjectsLocator
         {
             _gameObjects.Add(new GameObjectsDictionary(name, gameObject));
         }
+
+        public GameObject CreateGameObject(string name, string path)
+        {
+            var gameObject = Resources.Load(path) as GameObject;
+            var gameObjectSpawned = Object.Instantiate(gameObject);
+            
+            return gameObjectSpawned;
+        }
         
         public void RegisterGameObject(string name, string path)
         {

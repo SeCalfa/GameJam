@@ -1,5 +1,6 @@
 using Game.Code.Infrastructure.GameObjectsLocator;
 using Game.Code.Logic.Audio;
+using Game.Code.Logic.GUI;
 using Game.Code.Logic.GUI.Fade;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ namespace Game.Code.Infrastructure
         public SpriteRendererFade SpriteRendererFade { get; private set; }
         public Curtain Curtain { get; private set; }
         public SoundManager SoundManager { get; private set; }
+        public Hud Hud { get; private set; }
         
         private void Awake()
         {
@@ -96,9 +98,17 @@ namespace Game.Code.Infrastructure
         public void CreateHud()
         {
             Container.RegisterGameObject(Constants.HudName, Constants.HudPath);
-            var hud = Container.GetGameObjectByName(Constants.HudName);
+            Hud = Container.GetGameObjectByName<Hud>(Constants.HudName);
             
-            DontDestroyOnLoad(hud);
+            DontDestroyOnLoad(Hud.gameObject);
+        }
+        
+        public void CreatePlayer()
+        {
+            var player = Container.CreateGameObject(Constants.PlayerName, Constants.PlayerPath);
+            var startPoint = GameObject.FindWithTag("StartPoint").transform.position;
+
+            player.transform.position = startPoint;
         }
     }
 }

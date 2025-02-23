@@ -20,6 +20,15 @@ namespace Game.Code.Infrastructure
             if (levelType == LevelType.Map1)
             {
                 Game.Instance.CreateHud();
+                Game.Instance.CreatePlayer();
+            }
+            else if (levelType == LevelType.Map2)
+            {
+                Game.Instance.CreatePlayer();
+            }
+            else if (levelType == LevelType.Map3)
+            {
+                Game.Instance.CreatePlayer();
             }
             
             _curtain = Game.Instance.Curtain;
