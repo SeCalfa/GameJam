@@ -29,6 +29,13 @@ namespace Game.Code.Infrastructure.GameObjectsLocator
 
             return result;
         }
+        
+        public GameObject GetGameObjectByName(string name)
+        {
+            var gameObject = _gameObjects.First(g => g.Name == name).GameObject;
+
+            return gameObject;
+        }
 
         public void RemoveGameObject(string name)
         {

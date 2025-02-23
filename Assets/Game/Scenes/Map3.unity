@@ -759,6 +759,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7412392323520954051, guid: 87dd4bbc4ca1f134594fe33014eb0876, type: 3}
+      propertyPath: levelType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412392323520954051, guid: 87dd4bbc4ca1f134594fe33014eb0876, type: 3}
       propertyPath: darkSide.Array.data[0]
       value: 
       objectReference: {fileID: 1719356442}

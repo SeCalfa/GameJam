@@ -92,5 +92,13 @@ namespace Game.Code.Infrastructure
             
             DontDestroyOnLoad(SoundManager.gameObject);
         }
+        
+        public void CreateHud()
+        {
+            Container.RegisterGameObject(Constants.HudName, Constants.HudPath);
+            var hud = Container.GetGameObjectByName(Constants.HudName);
+            
+            DontDestroyOnLoad(hud);
+        }
     }
 }

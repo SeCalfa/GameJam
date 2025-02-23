@@ -17,6 +17,11 @@ namespace Game.Code.Infrastructure
             _sceneFade = Game.Instance.SpriteRendererFade;
             if (levelType != LevelType.Intro) _sceneFade.Init(darkSide);
             
+            if (levelType == LevelType.Map1)
+            {
+                Game.Instance.CreateHud();
+            }
+            
             _curtain = Game.Instance.Curtain;
             _curtain.Hide();
         }
