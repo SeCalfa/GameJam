@@ -9,11 +9,14 @@ namespace Game.Code.Logic.GUI.Menu
     {
         public GameObject creditsCanvas;
         public Curtain curtain; // Reference to the Curtain component
-        
+        public void Awake()
+        {
+            curtain.Hide();
+        }
         public void OnStartButtonClicked()
         {
             //Debug.Log("Start button clicked, switching scene.");
-            Infrastructure.Game.Instance.Curtain.Show(() => SceneManager.LoadScene(LevelType.Intro.ToString()));
+            curtain.Show(() => SceneManager.LoadSceneAsync(LevelType.Intro.ToString()));
         }
 
         public void OnCreditsButtonClicked()
