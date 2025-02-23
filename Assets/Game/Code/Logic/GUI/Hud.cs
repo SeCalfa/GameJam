@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Game.Code.Logic.GUI
@@ -16,6 +17,8 @@ namespace Game.Code.Logic.GUI
         
         private float _oxygen = 100;
         private float _brainHp = 100;
+        
+        public bool DarkSideOn => _brainHp <= 60;
 
         private void Update()
         {
@@ -26,11 +29,32 @@ namespace Game.Code.Logic.GUI
         {
             _oxygen -= Time.deltaTime / 2;
             Infrastructure.Game.Instance.Hud.FillOxygenBar(_oxygen);
+            
+            if (_oxygen <= 0)
+            {
+                LoseGame();
+            }
         }
 
         public void FillBrainBar(float hp)
         {
             brainBar.fillAmount = hp / 100f;
+        }
+        
+        public void TakeDamage(int damage)
+        {
+            _brainHp -= damage;
+            Infrastructure.Game.Instance.Hud.FillBrainBar(_brainHp);
+
+            if (Mathf.Approximately(_brainHp, 60))
+            {
+                Infrastructure.Game.Instance.SpriteRendererFade.Show();
+            }
+
+            if (_brainHp <= 0)
+            {
+                LoseGame();
+            }
         }
 
         public void FillOxygenBar(float hp)
@@ -59,6 +83,15 @@ namespace Game.Code.Logic.GUI
             {
                 interactionTip.gameObject.SetActive(show);
             }
+        }
+
+        public void LoseGame()
+        {
+            Infrastructure.Game.Instance.Curtain.Show(() =>
+            {
+                Infrastructure.Game.Instance.ClearGame();
+                SceneManager.LoadScene("Intro");
+            });
         }
     }
 }

@@ -58,5 +58,15 @@ namespace Game.Code.Infrastructure.GameObjectsLocator
 
             return gameObject != null;
         }
+
+        public void ClearAllGameObjects()
+        {
+            foreach (var go in _gameObjects)
+            {
+                Object.Destroy(go.GameObject);
+            }
+            
+            _gameObjects.Clear();
+        }
     }
 }

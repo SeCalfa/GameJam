@@ -36,30 +36,6 @@ namespace Game.Code.Infrastructure
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                Curtain.Show(() =>
-                {
-                    SceneManager.LoadScene("Game");
-                });
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                Curtain.Show(() =>
-                {
-                    SceneManager.LoadScene("Map2");
-                });
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                Curtain.Show(() =>
-                {
-                    SceneManager.LoadScene("Map3");
-                });
-            }
-            
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Application.Quit();
@@ -109,6 +85,12 @@ namespace Game.Code.Infrastructure
             var startPoint = GameObject.FindWithTag("StartPoint").transform.position;
 
             player.transform.position = startPoint;
+        }
+
+        public void ClearGame()
+        {
+            Container.ClearAllGameObjects();
+            Destroy(gameObject);
         }
     }
 }

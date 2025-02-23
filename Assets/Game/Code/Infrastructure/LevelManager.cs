@@ -21,37 +21,33 @@ namespace Game.Code.Infrastructure
             Instance = this;
             
             _sceneFade = Game.Instance.SpriteRendererFade;
-            if (levelType != LevelType.Intro) _sceneFade.Init(darkSide);
+            if (levelType != LevelType.Intro && levelType != LevelType.MainMenu) _sceneFade.Init(darkSide);
             
             if (levelType == LevelType.Map1)
             {
                 Game.Instance.CreateHud();
                 Game.Instance.CreatePlayer();
+                
+                if (Game.Instance.Hud.DarkSideOn)
+                    Game.Instance.SpriteRendererFade.Show();
             }
             else if (levelType == LevelType.Map2)
             {
                 Game.Instance.CreatePlayer();
+                
+                if (Game.Instance.Hud.DarkSideOn)
+                    Game.Instance.SpriteRendererFade.Show();
             }
             else if (levelType == LevelType.Map3)
             {
                 Game.Instance.CreatePlayer();
+                
+                if (Game.Instance.Hud.DarkSideOn)
+                    Game.Instance.SpriteRendererFade.Show();
             }
             
             _curtain = Game.Instance.Curtain;
             _curtain.Hide();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.R) && _sceneFade)
-            {
-                _sceneFade.Show();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.T) && _sceneFade)
-            {
-                _sceneFade.Hide();
-            }
         }
     }
 }

@@ -28,14 +28,6 @@ namespace Game.Code.Logic.ShopSystem
                 { _item3, 12 },
             };
         }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SceneManager.LoadScene("ShopScene");
-            }
-        }
         
         public void PurchaseItem()
         {
