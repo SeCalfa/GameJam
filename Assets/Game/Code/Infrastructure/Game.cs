@@ -1,8 +1,8 @@
 using Game.Code.Infrastructure.GameObjectsLocator;
 using Game.Code.Logic.Audio;
-using Game.Code.Logic.GUI.FadeIn;
-using Game.Code.Logic.GUI.TransitionController;
+using Game.Code.Logic.GUI.Fade;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Code.Infrastructure
 {
@@ -12,10 +12,8 @@ namespace Game.Code.Infrastructure
         
         public Container Container { get; private set; }
         public SpriteRendererFade SpriteRendererFade { get; private set; }
-
-        private SceneTransitionController SceneTransitionController { get; set; }
-
-        public SoundManager SoundManager { get; set; }
+        public Curtain Curtain { get; private set; }
+        public SoundManager SoundManager { get; private set; }
         
         private void Awake()
         {
@@ -28,9 +26,9 @@ namespace Game.Code.Infrastructure
             
             Init();
             CreateSpriteFade();
-            CreateTransitionController();
+            CreateCurtain();
             CreateSoundManager();
-                        
+            
             DontDestroyOnLoad(gameObject);
         }
 
@@ -38,22 +36,26 @@ namespace Game.Code.Infrastructure
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                SceneTransitionController.StartSceneTransition("Game");
-
-                
+                Curtain.Show(() =>
+                {
+                    SceneManager.LoadScene("Game");
+                });
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                SceneTransitionController.StartSceneTransition("Map2");
-                
-                
+                Curtain.Show(() =>
+                {
+                    SceneManager.LoadScene("Map2");
+                });
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                SceneTransitionController.StartSceneTransition("Map3");
-                
+                Curtain.Show(() =>
+                {
+                    SceneManager.LoadScene("Map3");
+                });
             }
             
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -75,14 +77,14 @@ namespace Game.Code.Infrastructure
             DontDestroyOnLoad(SpriteRendererFade.gameObject);
         }
 
-        private void CreateTransitionController()
+        private void CreateCurtain()
         {
-            Container.RegisterGameObject(Constants.CurtainSceneName, Constants.CurtainSceneTransitionPath);
-            SceneTransitionController = Container.GetGameObjectByName<SceneTransitionController>(Constants.CurtainSceneName);
+            Container.RegisterGameObject(Constants.CurtainName, Constants.CurtainPath);
+            Curtain = Container.GetGameObjectByName<Curtain>(Constants.CurtainName);
             
-            DontDestroyOnLoad(SceneTransitionController.gameObject);
+            DontDestroyOnLoad(Curtain.gameObject);
         }
-
+        
         private void CreateSoundManager()
         {
             Container.RegisterGameObject(Constants.SoundManagerName, Constants.SoundManagerPath);

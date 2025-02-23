@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using Game.Code.Logic.Audio;
-using Game.Code.Logic.GUI.FadeIn;
+using Game.Code.Logic.GUI.Fade;
 using UnityEngine;
 
 namespace Game.Code.Infrastructure
@@ -11,11 +10,15 @@ namespace Game.Code.Infrastructure
         [SerializeField] private List<SpriteRenderer> darkSide;
         
         private SpriteRendererFade _sceneFade;
+        private Curtain _curtain;
         
         private void Awake()
         {
             _sceneFade = Game.Instance.SpriteRendererFade;
-            _sceneFade.Init(darkSide);
+            if (levelType != LevelType.Intro) _sceneFade.Init(darkSide);
+            
+            _curtain = Game.Instance.Curtain;
+            _curtain.Hide();
         }
 
         private void Update()
