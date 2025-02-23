@@ -1,4 +1,5 @@
 using Game.Code.Infrastructure.GameObjectsLocator;
+using Game.Code.Logic.Audio;
 using Game.Code.Logic.GUI.Fade;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,7 @@ namespace Game.Code.Infrastructure
         public Container Container { get; private set; }
         public SpriteRendererFade SpriteRendererFade { get; private set; }
         public Curtain Curtain { get; private set; }
+        public SoundManager SoundManager { get; private set; }
         
         private void Awake()
         {
@@ -25,6 +27,7 @@ namespace Game.Code.Infrastructure
             Init();
             CreateSpriteFade();
             CreateCurtain();
+            CreateSoundManager();
             
             DontDestroyOnLoad(gameObject);
         }
@@ -80,6 +83,14 @@ namespace Game.Code.Infrastructure
             Curtain = Container.GetGameObjectByName<Curtain>(Constants.CurtainName);
             
             DontDestroyOnLoad(Curtain.gameObject);
+        }
+        
+        private void CreateSoundManager()
+        {
+            Container.RegisterGameObject(Constants.SoundManagerName, Constants.SoundManagerPath);
+            SoundManager = Container.GetGameObjectByName<SoundManager>(Constants.SoundManagerName);
+            
+            DontDestroyOnLoad(SoundManager.gameObject);
         }
     }
 }
