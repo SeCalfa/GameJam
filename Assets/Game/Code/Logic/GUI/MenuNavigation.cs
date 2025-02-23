@@ -1,17 +1,22 @@
-using Game.Code.Logic.GUI.FadeIn;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Game.Code;
+using Game.Code.Logic.GUI.Fade;
 
 namespace Game.Code.Logic.GUI.Menu
 {
     public class MenuManager : MonoBehaviour
     {
         public GameObject creditsCanvas;
-
+        public Curtain curtain; // Reference to the Curtain component
+        public void Awake()
+        {
+            curtain.Hide();
+        }
         public void OnStartButtonClicked()
         {
             //Debug.Log("Start button clicked, switching scene.");
-            SceneManager.LoadSceneAsync("Game");
+            curtain.Show(() => SceneManager.LoadSceneAsync(LevelType.Intro.ToString()));
         }
 
         public void OnCreditsButtonClicked()
