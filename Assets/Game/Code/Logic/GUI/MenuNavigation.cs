@@ -8,15 +8,11 @@ namespace Game.Code.Logic.GUI.Menu
     public class MenuManager : MonoBehaviour
     {
         public GameObject creditsCanvas;
-        public Curtain curtain; // Reference to the Curtain component
-        public void Awake()
-        {
-            curtain.Hide();
-        }
+       
         public void OnStartButtonClicked()
         {
             //Debug.Log("Start button clicked, switching scene.");
-            curtain.Show(() => SceneManager.LoadSceneAsync(LevelType.Intro.ToString()));
+            Infrastructure.Game.Instance.Curtain.Show(() => SceneManager.LoadSceneAsync(LevelType.Intro.ToString()));
         }
 
         public void OnCreditsButtonClicked()
