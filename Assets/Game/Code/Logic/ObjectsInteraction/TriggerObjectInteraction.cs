@@ -9,29 +9,20 @@ namespace Game.Code.Logic.ObjectsInteraction
     public class TriggerObjectInteraction : MonoBehaviour
     {
         [SerializeField] private Animator animator; // Reference to the Animator component
-        [SerializeField] private bool isRuneHere; // Boolean to indicate if a rune is present
+        [SerializeField] private bool isRuneHere;   // Boolean to indicate if a rune is present
 
         private bool isPlayerNearby = false;
         private Hud hud;
 
         private void Start()
         {
-            // Ensure the HUD is created
-            //if (!GameClass.Instance.Container.Contains(Constants.HudName))
-            //{
-            //    GameClass.Instance.CreateHud();
-            //}
-
             // Get the HUD component from the Game instance
             hud = GameClass.Instance.Hud;
             if (hud != null)
             {
                 hud.ShowInteractionTip(false);
             }
-
-            // Determine if a rune is present based on the level type
-            LevelType currentLevel = LevelManager.Instance.GetLevelType;
-            isRuneHere = currentLevel == LevelType.Map1 || currentLevel == LevelType.Map2 || currentLevel == LevelType.Map3;
+            // Removed code that overwrites isRuneHere
         }
 
         private void Update()
