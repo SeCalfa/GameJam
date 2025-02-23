@@ -1,11 +1,10 @@
-using Game.Code.Logic.GUI.FadeIn;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Game.Code.Logic.GUI.Menu
+namespace Game.Code.Logic.GUI
 {
-    public class MenuManager : MonoBehaviour
+    public class MainMenu : MonoBehaviour
     {
         //[SerializeField] private FadeInCanvasGroup fadeInCanvasGroup;
         [SerializeField] private GameObject creditsPopup;
