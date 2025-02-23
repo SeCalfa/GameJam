@@ -1,24 +1,30 @@
-using TMPro;
 using UnityEngine;
-// For TextMeshPro
 // For Constants
 using GameClass = Game.Code.Infrastructure.Game; // Alias for Game class
+using Game.Code.Logic.GUI; // For Hud class
 
 namespace Game.Code.Logic.ObjectsInteraction
 {
     public class TriggerObjectInteraction : MonoBehaviour
     {
-        [SerializeField] private TMP_Text interactPrompt;
-        [SerializeField] private string promptMessage = "Press E to interact";
         [SerializeField] private Animator animator; // Reference to the Animator component
 
         private bool isPlayerNearby = false;
+        private Hud hud;
 
         private void Start()
         {
-            if (interactPrompt != null)
+            //// Ensure the HUD is created
+            //if (!GameClass.Instance.Container.Contains(Constants.HudName))
+            //{
+            //    GameClass.Instance.CreateHud();
+            //}
+
+            // Get the HUD component from the Game instance
+            hud = GameClass.Instance.Hud;
+            if (hud != null)
             {
-                interactPrompt.gameObject.SetActive(false);
+                hud.ShowInteractionTip(false);
             }
         }
 
@@ -26,17 +32,6 @@ namespace Game.Code.Logic.ObjectsInteraction
         {
             if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
             {
-                if (!GameClass.Instance.Container.Contains(Constants.HudName))
-                {
-                    GameClass.Instance.Container.RegisterGameObject(Constants.HudName, Constants.HudPath);
-                }
-
-                var hud = GameClass.Instance.Container.GetGameObjectByName<GameObject>(Constants.HudName);
-                if (hud != null)
-                {
-                    hud.SetActive(true);
-                }
-
                 // Trigger the disappearing animation
                 if (animator != null)
                 {
@@ -48,13 +43,12 @@ namespace Game.Code.Logic.ObjectsInteraction
         // When player is nearby
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag(Constants.PlayerName))
             {
                 isPlayerNearby = true;
-                if (interactPrompt != null)
+                if (hud != null)
                 {
-                    interactPrompt.text = promptMessage;
-                    interactPrompt.gameObject.SetActive(true);
+                    hud.ShowInteractionTip(true);
                 }
             }
         }
@@ -62,21 +56,12 @@ namespace Game.Code.Logic.ObjectsInteraction
         // When player leaves the area
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag(Constants.PlayerName))
             {
                 isPlayerNearby = false;
-                if (interactPrompt != null)
+                if (hud != null)
                 {
-                    interactPrompt.gameObject.SetActive(false);
-                }
-                if (GameClass.Instance.Container.Contains(Constants.HudName))
-                {
-                    var hud = GameClass.Instance.Container.GetGameObjectByName<GameObject>(Constants.HudName);
-                    if (hud != null)
-                    {
-                        hud.SetActive(false);
-                        GameClass.Instance.Container.RemoveGameObject(Constants.HudName); // Prevent memory leak
-                    }
+                    hud.ShowInteractionTip(false);
                 }
             }
         }
